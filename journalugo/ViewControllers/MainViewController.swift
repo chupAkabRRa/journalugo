@@ -24,6 +24,8 @@ class ExampleRecorderDelegate: DefaultAVMixerRecorderDelegate {
 
 fileprivate enum DisplayData {
     static let navigationItemTitle = "Stream"
+    static let startStreamButtonTitle = "Start"
+    static let stopStreamButtonTitle = "Stop"
 }
 
 public class MainViewController: UIViewController {
@@ -37,41 +39,16 @@ public class MainViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title = DisplayData.navigationItemTitle
-
-        self.rtmpStream = RTMPStream(connection: rtmpConnection)
-        rtmpStream.syncOrientation = true
-        rtmpStream.captureSettings = [
-            "sessionPreset": AVCaptureSession.Preset.hd1280x720.rawValue,
-            "continuousAutofocus": true,
-            "continuousExposure": true
-        ]
-        rtmpStream.videoSettings = [
-            "width": 720,
-            "height": 1280
-        ]
-        rtmpStream.audioSettings = [
-            "sampleRate": sampleRate
-        ]
-        rtmpStream.mixer.recorder.delegate = ExampleRecorderDelegate()
+        configureView()
+        setupRTMPStream()
     }
 
     override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        rtmpStream.captureSettings["fps"] = Constants.instance.fps
-        rtmpStream.audioSettings["bitrate"] = Constants.instance.audioBitrate! * 1024
-        rtmpStream.videoSettings["bitrate"] = Constants.instance.videoBitrate! * 1024
 
-        rtmpStream.attachAudio(AVCaptureDevice.default(for: AVMediaType.audio)) { error in
-            print("Error on attach audio to stream: \(error)")
-        }
-        rtmpStream.attachCamera(DeviceUtil.device(withPosition: .back)) { error in
-            print("Error on attach video to stream: \(error)")
-        }
-
-        lfView.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        lfView.attachStream(rtmpStream)
+        configureRTMPStream()
+        configureCameraView()
 
         print(Constants.instance)
     }
@@ -90,5 +67,77 @@ public class MainViewController: UIViewController {
         }
 
         currentPosition = position
+    }
+
+    @IBAction func pauseButtonClicked(_ sender: UIButton) {
+        rtmpStream.togglePause()
+    }
+
+    @IBAction func startStream(_ sender: UIButton) {
+        if sender.titleLabel?.text == DisplayData.startStreamButtonTitle {
+            UIApplication.shared.isIdleTimerDisabled = true
+            rtmpConnection.addEventListener(Event.RTMP_STATUS, selector: #selector(rtmpStatusHandler), observer: self)
+            rtmpConnection.connect(Constants.instance.uri!)
+            sender.setTitle(DisplayData.stopStreamButtonTitle, for: .normal)
+        } else {
+            UIApplication.shared.isIdleTimerDisabled = false
+            rtmpConnection.close()
+            rtmpConnection.removeEventListener(Event.RTMP_STATUS, selector: #selector(rtmpStatusHandler), observer: self)
+            sender.setTitle(DisplayData.startStreamButtonTitle, for: .normal)
+        }
+    }
+
+    @objc func rtmpStatusHandler(_ notification: Notification) {
+        let e: Event = Event.from(notification)
+        if let data: ASObject = e.data as? ASObject, let code: String = data["code"] as? String {
+            switch code {
+            case RTMPConnection.Code.connectSuccess.rawValue:
+                rtmpStream!.publish(Constants.instance.secret!)
+            default:
+                break
+            }
+        }
+    }
+}
+
+private extension MainViewController {
+    func configureView() {
+        navigationItem.title = DisplayData.navigationItemTitle
+    }
+
+    func setupRTMPStream() {
+        rtmpStream = RTMPStream(connection: rtmpConnection)
+        rtmpStream.syncOrientation = true
+        rtmpStream.captureSettings = [
+            "sessionPreset": AVCaptureSession.Preset.hd1280x720.rawValue,
+            "continuousAutofocus": true,
+            "continuousExposure": true
+        ]
+        rtmpStream.videoSettings = [
+            "width": 720,
+            "height": 1280
+        ]
+        rtmpStream.audioSettings = [
+            "sampleRate": sampleRate
+        ]
+        rtmpStream.mixer.recorder.delegate = ExampleRecorderDelegate()
+    }
+
+    func configureRTMPStream() {
+        rtmpStream.captureSettings["fps"] = Constants.instance.fps
+        rtmpStream.audioSettings["bitrate"] = Constants.instance.audioBitrate! * 1024
+        rtmpStream.videoSettings["bitrate"] = Constants.instance.videoBitrate! * 1024
+
+        rtmpStream.attachAudio(AVCaptureDevice.default(for: AVMediaType.audio)) { error in
+            print("Error on attach audio to stream: \(error)")
+        }
+        rtmpStream.attachCamera(DeviceUtil.device(withPosition: .back)) { error in
+            print("Error on attach video to stream: \(error)")
+        }
+    }
+
+    func configureCameraView() {
+        lfView.videoGravity = AVLayerVideoGravity.resizeAspect
+        lfView.attachStream(rtmpStream)
     }
 }

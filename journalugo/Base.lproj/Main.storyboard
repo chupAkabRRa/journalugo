@@ -39,13 +39,35 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghi-gO-XzT">
+                                <rect key="frame" x="105" y="620" width="166" height="38"/>
+                                <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="startStream:" destination="Nei-Oh-7sa" eventType="touchUpInside" id="vcw-rt-ZSA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coB-zP-FOd">
+                                <rect key="frame" x="313" y="624" width="46" height="30"/>
+                                <state key="normal" title="Pause"/>
+                                <connections>
+                                    <action selector="pauseButtonClicked:" destination="Nei-Oh-7sa" eventType="touchUpInside" id="v96-Ct-rMF"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.029702536759999999" green="0.80384534600000002" blue="0.031480230390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.72597396087183308" green="0.7847941094986709" blue="0.80384534600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Fh0-eL-n66" firstAttribute="trailing" secondItem="YZE-Ad-7Oj" secondAttribute="trailing" id="1IB-dK-iWP"/>
                             <constraint firstItem="Fh0-eL-n66" firstAttribute="top" secondItem="YZE-Ad-7Oj" secondAttribute="top" id="3pZ-OL-5gk"/>
+                            <constraint firstItem="YZE-Ad-7Oj" firstAttribute="trailing" secondItem="ghi-gO-XzT" secondAttribute="trailing" constant="104" id="CIG-ct-2lD"/>
+                            <constraint firstItem="ghi-gO-XzT" firstAttribute="leading" secondItem="YZE-Ad-7Oj" secondAttribute="leading" constant="105" id="DfD-uX-geP"/>
+                            <constraint firstItem="ghi-gO-XzT" firstAttribute="top" secondItem="Fh0-eL-n66" secondAttribute="bottom" constant="8" id="TEg-4o-vKr"/>
+                            <constraint firstItem="coB-zP-FOd" firstAttribute="leading" secondItem="ghi-gO-XzT" secondAttribute="trailing" constant="42" id="Z8o-XH-Vej"/>
+                            <constraint firstItem="coB-zP-FOd" firstAttribute="top" secondItem="Fh0-eL-n66" secondAttribute="bottom" constant="12" id="axB-Bb-6e2"/>
                             <constraint firstItem="Fh0-eL-n66" firstAttribute="leading" secondItem="YZE-Ad-7Oj" secondAttribute="leading" id="cfd-or-uz9"/>
+                            <constraint firstItem="YZE-Ad-7Oj" firstAttribute="bottom" secondItem="ghi-gO-XzT" secondAttribute="bottom" constant="9" id="cx1-C5-Sad"/>
                             <constraint firstItem="YZE-Ad-7Oj" firstAttribute="bottom" secondItem="Fh0-eL-n66" secondAttribute="bottom" constant="55" id="eFE-mN-BTq"/>
+                            <constraint firstItem="YZE-Ad-7Oj" firstAttribute="trailing" secondItem="coB-zP-FOd" secondAttribute="trailing" constant="16" id="eWo-83-FzR"/>
+                            <constraint firstItem="YZE-Ad-7Oj" firstAttribute="bottom" secondItem="coB-zP-FOd" secondAttribute="bottom" constant="13" id="iF6-MN-e7P"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YZE-Ad-7Oj"/>
                     </view>
