@@ -123,19 +123,8 @@ class RunningTextLineWidget: VisualEffect {
         guard let result = internalLabel.image else {
             return CIImage.empty()
         }
-
-        let alpha: CGFloat = 0.3
-        let rgba: [CGFloat] = [0.0, 0.0, 0.0, alpha];
-        let colorMatrix: CIFilter? = CIFilter(name: "CIColorMatrix")
-        colorMatrix?.setDefaults()
-        colorMatrix?.setValue(result, forKey: kCIInputImageKey)
-        colorMatrix?.setValue(CIVector(values: rgba, count: 4), forKey: "inputAVector")
         
-        if let trasparentResult = colorMatrix?.outputImage {
-            filter!.setValue(trasparentResult, forKey: "inputImage")
-        } else {
-            filter!.setValue(result, forKey: "inputImage")
-        }
+        filter!.setValue(result, forKey: "inputImage")
         filter!.setValue(image, forKey: "inputBackgroundImage")
         
         return filter!.outputImage!
