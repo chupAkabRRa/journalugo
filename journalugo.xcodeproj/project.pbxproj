@@ -10,6 +10,7 @@
 		94982661D8C3C1D800E79C9E /* Pods_journalugo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE9EEFEC056EF18D4A35519 /* Pods_journalugo.framework */; };
 		B023098E20BA0BF100233540 /* StaticImageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B023098D20BA0BF100233540 /* StaticImageWidget.swift */; };
 		B023099120BA0C6500233540 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B023099020BA0C6500233540 /* UIImage.swift */; };
+		B023099320BA281800233540 /* BadgeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B023099220BA281800233540 /* BadgeWidget.swift */; };
 		B063E86E20B8B711003D89CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E86D20B8B711003D89CD /* AppDelegate.swift */; };
 		B063E87320B8B711003D89CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B063E87120B8B711003D89CD /* Main.storyboard */; };
 		B063E87520B8B714003D89CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B063E87420B8B714003D89CD /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		95731A7F7BFDB04AF7E535F8 /* Pods-journalugo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-journalugo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-journalugo/Pods-journalugo.debug.xcconfig"; sourceTree = "<group>"; };
 		B023098D20BA0BF100233540 /* StaticImageWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticImageWidget.swift; sourceTree = "<group>"; };
 		B023099020BA0C6500233540 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		B023099220BA281800233540 /* BadgeWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeWidget.swift; sourceTree = "<group>"; };
 		B063E86A20B8B711003D89CD /* journalugo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = journalugo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B063E86D20B8B711003D89CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B063E87220B8B711003D89CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		D78EA23D20B97E060036518A /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				B023099220BA281800233540 /* BadgeWidget.swift */,
 				D78EA23E20B97E3C0036518A /* RunningTextLine.swift */,
 				B06D798120B9D110007E397A /* BlurTransitionEffect.swift */,
 				B023098D20BA0BF100233540 /* StaticImageWidget.swift */,
@@ -257,6 +260,7 @@
 				B092651320B8C6AB000DB733 /* MainViewController.swift in Sources */,
 				B063E86E20B8B711003D89CD /* AppDelegate.swift in Sources */,
 				B06D798220B9D110007E397A /* BlurTransitionEffect.swift in Sources */,
+				B023099320BA281800233540 /* BadgeWidget.swift in Sources */,
 				D78EA23F20B97E3C0036518A /* RunningTextLine.swift in Sources */,
 				B092651020B8C19D000DB733 /* Constants.swift in Sources */,
 				B0A16D3820B8CB5F00336FEA /* SettingsViewController.swift in Sources */,
