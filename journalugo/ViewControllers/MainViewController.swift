@@ -29,10 +29,11 @@ fileprivate enum DisplayData {
 }
 
 public class MainViewController: UIViewController {
-    @IBOutlet weak var lfView: LFView!
+    @IBOutlet weak var lfView: GLLFView!
 
     var rtmpConnection: RTMPConnection = RTMPConnection()
     var rtmpStream: RTMPStream!
+    var widget: RunningTextLineWidget!
 
     var currentPosition: AVCaptureDevice.Position = .back
 
@@ -43,8 +44,8 @@ public class MainViewController: UIViewController {
         setupRTMPStream()
     }
 
-    override public func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
 
         configureRTMPStream()
@@ -70,7 +71,11 @@ public class MainViewController: UIViewController {
     }
 
     @IBAction func pauseButtonClicked(_ sender: UIButton) {
-        rtmpStream.togglePause()
+        widget = RunningTextLineWidget(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
+                    widget.addLabel(text: "ZDAROVA BRO KAK DELA ZHITUHA U MENYA VSE OK SIZHU POGROMIRUY")
+//                    lfView.addSubview(widget.internalLabel)
+        _ = rtmpStream.registerEffect(video: widget)
+//        rtmpStream.togglePause()
     }
 
     @IBAction func startStream(_ sender: UIButton) {
@@ -83,6 +88,7 @@ public class MainViewController: UIViewController {
             UIApplication.shared.isIdleTimerDisabled = false
             rtmpConnection.close()
             rtmpConnection.removeEventListener(Event.RTMP_STATUS, selector: #selector(rtmpStatusHandler), observer: self)
+            _ = rtmpStream.unregisterEffect(video: widget)
             sender.setTitle(DisplayData.startStreamButtonTitle, for: .normal)
         }
     }
