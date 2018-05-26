@@ -62,12 +62,42 @@ public class MainViewController: UIViewController {
     }
 
     @IBAction func swapCamera(_ sender: UIBarButtonItem) {
-        let position: AVCaptureDevice.Position = currentPosition == .back ? .front : .back
-        rtmpStream.attachCamera(DeviceUtil.device(withPosition: position)) { error in
-            print("Error on swapping camera: \(error)")
-        }
+        let delta = 0.1
 
-        currentPosition = position
+        let startTransition1 = BlurTransition(blurStrength: 6.0)
+        let startTransition2 = BlurTransition(blurStrength: 6.0)
+        let startTransition3 = BlurTransition(blurStrength: 6.0)
+        let startTransition4 = BlurTransition(blurStrength: 6.0)
+
+        _ = rtmpStream.registerEffect(video: startTransition1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delta) {
+            _ = self.rtmpStream.registerEffect(video: startTransition2)
+            DispatchQueue.main.asyncAfter(deadline: .now() + delta) {
+                _ = self.rtmpStream.registerEffect(video: startTransition3)
+                DispatchQueue.main.asyncAfter(deadline: .now() + delta) {
+                    _ = self.rtmpStream.registerEffect(video: startTransition4)
+
+                    let position: AVCaptureDevice.Position = self.currentPosition == .back ? .front : .back
+                    self.rtmpStream.attachCamera(DeviceUtil.device(withPosition: position)) { error in
+                        print("Error on swapping camera: \(error)")
+                    }
+                    self.currentPosition = position
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + delta) {
+                        _ = self.rtmpStream.unregisterEffect(video: startTransition4)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + delta) {
+                            _ = self.rtmpStream.unregisterEffect(video: startTransition3)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + delta) {
+                                _ = self.rtmpStream.unregisterEffect(video: startTransition2)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + delta) {
+                                    _ = self.rtmpStream.unregisterEffect(video: startTransition1)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @IBAction func pauseButtonClicked(_ sender: UIButton) {
