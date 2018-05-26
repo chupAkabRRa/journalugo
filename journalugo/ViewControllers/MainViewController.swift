@@ -33,7 +33,9 @@ public class MainViewController: UIViewController {
 
     var rtmpConnection: RTMPConnection = RTMPConnection()
     var rtmpStream: RTMPStream!
-    var widget: RunningTextLineWidget!
+    
+    // Set of different widgets for demo
+    var widgetRunningText: RunningTextLineWidget!
 
     var currentPosition: AVCaptureDevice.Position = .back
 
@@ -42,6 +44,11 @@ public class MainViewController: UIViewController {
 
         configureView()
         setupRTMPStream()
+        
+        widgetRunningText = RunningTextLineWidget(frame: CGRect(x: 0, y: 20, width: self.view.frame.width, height: 50))
+        widgetRunningText.addLabel(text: "ZDAROVA BRO KAK DELA ZHITUHA U MENYA VSE OK SIZHU POGROMIRUY")
+        self.view.insertSubview(widgetRunningText.internalLabel, belowSubview: lfView)
+        _ = rtmpStream.registerEffect(video: widgetRunningText)
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -71,11 +78,7 @@ public class MainViewController: UIViewController {
     }
 
     @IBAction func pauseButtonClicked(_ sender: UIButton) {
-        widget = RunningTextLineWidget(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
-        widget.addLabel(text: "ZDAROVA BRO KAK DELA ZHITUHA U MENYA VSE OK SIZHU POGROMIRUY")
-        self.view.insertSubview(widget.internalLabel, belowSubview: lfView)
-        _ = rtmpStream.registerEffect(video: widget)
-//        rtmpStream.togglePause()
+        rtmpStream.togglePause()
     }
 
     @IBAction func startStream(_ sender: UIButton) {
@@ -88,7 +91,7 @@ public class MainViewController: UIViewController {
             UIApplication.shared.isIdleTimerDisabled = false
             rtmpConnection.close()
             rtmpConnection.removeEventListener(Event.RTMP_STATUS, selector: #selector(rtmpStatusHandler), observer: self)
-            _ = rtmpStream.unregisterEffect(video: widget)
+            _ = rtmpStream.unregisterEffect(video: widgetRunningText)
             sender.setTitle(DisplayData.startStreamButtonTitle, for: .normal)
         }
     }
