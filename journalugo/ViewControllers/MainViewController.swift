@@ -45,7 +45,7 @@ public class MainViewController: UIViewController {
         configureView()
         setupRTMPStream()
         
-        widgetRunningText = RunningTextLineWidget(frame: CGRect(x: 0, y: 20, width: self.view.frame.width, height: 50))
+        widgetRunningText = RunningTextLineWidget(frame: CGRect(x: 0, y: 0, width: lfView.frame.width - 15, height: 50))
         widgetRunningText.addLabel(text: "ZDAROVA BRO KAK DELA ZHITUHA U MENYA VSE OK SIZHU POGROMIRUY")
         self.view.insertSubview(widgetRunningText.internalLabel, belowSubview: lfView)
         _ = rtmpStream.registerEffect(video: widgetRunningText)

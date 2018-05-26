@@ -43,16 +43,11 @@ class RunningTextLine: UIView {
     
     func getImage() {
         DispatchQueue.main.async {
-            UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0)
-            self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+            UIGraphicsBeginImageContextWithOptions(CGSize(width: self.bounds.width, height: 120), false, 0)
+            self.drawHierarchy(in: CGRect(x: 0, y: 0, width: self.bounds.width, height: 40), afterScreenUpdates: true)
             self.image = CIImage(image: UIGraphicsGetImageFromCurrentImageContext()!, options: nil)!
             UIGraphicsEndImageContext()
         }
-
-
-
-        // This line is for image local save
-        //return UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
     }
     
     func reinitLabels() {
@@ -129,8 +124,18 @@ class RunningTextLineWidget: VisualEffect {
             return CIImage.empty()
         }
 
+        let alpha: CGFloat = 0.3
+        let rgba: [CGFloat] = [0.0, 0.0, 0.0, alpha];
+        let colorMatrix: CIFilter? = CIFilter(name: "CIColorMatrix")
+        colorMatrix?.setDefaults()
+        colorMatrix?.setValue(result, forKey: kCIInputImageKey)
+        colorMatrix?.setValue(CIVector(values: rgba, count: 4), forKey: "inputAVector")
         
-        filter!.setValue(result, forKey: "inputImage")
+        if let trasparentResult = colorMatrix?.outputImage {
+            filter!.setValue(trasparentResult, forKey: "inputImage")
+        } else {
+            filter!.setValue(result, forKey: "inputImage")
+        }
         filter!.setValue(image, forKey: "inputBackgroundImage")
         
         return filter!.outputImage!
