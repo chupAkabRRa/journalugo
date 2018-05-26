@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		94982661D8C3C1D800E79C9E /* Pods_journalugo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE9EEFEC056EF18D4A35519 /* Pods_journalugo.framework */; };
 		B063E86E20B8B711003D89CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E86D20B8B711003D89CD /* AppDelegate.swift */; };
-		B063E87020B8B711003D89CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B063E86F20B8B711003D89CD /* ViewController.swift */; };
 		B063E87320B8B711003D89CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B063E87120B8B711003D89CD /* Main.storyboard */; };
 		B063E87520B8B714003D89CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B063E87420B8B714003D89CD /* Assets.xcassets */; };
 		B063E87820B8B714003D89CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B063E87620B8B714003D89CD /* LaunchScreen.storyboard */; };
+		B092651020B8C19D000DB733 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B092650F20B8C19D000DB733 /* Constants.swift */; };
+		B092651320B8C6AB000DB733 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B092651220B8C6AB000DB733 /* MainViewController.swift */; };
+		B0A16D3820B8CB5F00336FEA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A16D3720B8CB5F00336FEA /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		95731A7F7BFDB04AF7E535F8 /* Pods-journalugo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-journalugo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-journalugo/Pods-journalugo.debug.xcconfig"; sourceTree = "<group>"; };
 		B063E86A20B8B711003D89CD /* journalugo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = journalugo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B063E86D20B8B711003D89CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B063E86F20B8B711003D89CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B063E87220B8B711003D89CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B063E87420B8B714003D89CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B063E87720B8B714003D89CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B063E87920B8B714003D89CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B092650F20B8C19D000DB733 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B092651220B8C6AB000DB733 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B0A16D3720B8CB5F00336FEA /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D8AC44C5CB76F0FFECB84654 /* Pods-journalugo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-journalugo.release.xcconfig"; path = "Pods/Target Support Files/Pods-journalugo/Pods-journalugo.release.xcconfig"; sourceTree = "<group>"; };
 		EAE9EEFEC056EF18D4A35519 /* Pods_journalugo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_journalugo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -78,14 +82,32 @@
 		B063E86C20B8B711003D89CD /* journalugo */ = {
 			isa = PBXGroup;
 			children = (
+				B092651120B8C6A2000DB733 /* ViewControllers */,
+				B092650E20B8C192000DB733 /* Constants */,
 				B063E86D20B8B711003D89CD /* AppDelegate.swift */,
-				B063E86F20B8B711003D89CD /* ViewController.swift */,
 				B063E87120B8B711003D89CD /* Main.storyboard */,
 				B063E87420B8B714003D89CD /* Assets.xcassets */,
 				B063E87620B8B714003D89CD /* LaunchScreen.storyboard */,
 				B063E87920B8B714003D89CD /* Info.plist */,
 			);
 			path = journalugo;
+			sourceTree = "<group>";
+		};
+		B092650E20B8C192000DB733 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B092650F20B8C19D000DB733 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		B092651120B8C6A2000DB733 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B0A16D3720B8CB5F00336FEA /* SettingsViewController.swift */,
+				B092651220B8C6AB000DB733 /* MainViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,8 +224,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B063E87020B8B711003D89CD /* ViewController.swift in Sources */,
+				B092651320B8C6AB000DB733 /* MainViewController.swift in Sources */,
 				B063E86E20B8B711003D89CD /* AppDelegate.swift in Sources */,
+				B092651020B8C19D000DB733 /* Constants.swift in Sources */,
+				B0A16D3820B8CB5F00336FEA /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +375,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6752J9Q8Z;
 				INFOPLIST_FILE = journalugo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyped.journalugo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -367,7 +394,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6752J9Q8Z;
 				INFOPLIST_FILE = journalugo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyped.journalugo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
