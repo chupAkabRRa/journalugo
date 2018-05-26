@@ -15,6 +15,7 @@
 		B092651020B8C19D000DB733 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B092650F20B8C19D000DB733 /* Constants.swift */; };
 		B092651320B8C6AB000DB733 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B092651220B8C6AB000DB733 /* MainViewController.swift */; };
 		B0A16D3820B8CB5F00336FEA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A16D3720B8CB5F00336FEA /* SettingsViewController.swift */; };
+		D78EA23F20B97E3C0036518A /* RunningTextLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78EA23E20B97E3C0036518A /* RunningTextLine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		B092650F20B8C19D000DB733 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B092651220B8C6AB000DB733 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B0A16D3720B8CB5F00336FEA /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D78EA23E20B97E3C0036518A /* RunningTextLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTextLine.swift; sourceTree = "<group>"; };
 		D8AC44C5CB76F0FFECB84654 /* Pods-journalugo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-journalugo.release.xcconfig"; path = "Pods/Target Support Files/Pods-journalugo/Pods-journalugo.release.xcconfig"; sourceTree = "<group>"; };
 		EAE9EEFEC056EF18D4A35519 /* Pods_journalugo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_journalugo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -82,6 +84,7 @@
 		B063E86C20B8B711003D89CD /* journalugo */ = {
 			isa = PBXGroup;
 			children = (
+				D78EA23D20B97E060036518A /* Widgets */,
 				B092651120B8C6A2000DB733 /* ViewControllers */,
 				B092650E20B8C192000DB733 /* Constants */,
 				B063E86D20B8B711003D89CD /* AppDelegate.swift */,
@@ -108,6 +111,14 @@
 				B092651220B8C6AB000DB733 /* MainViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D78EA23D20B97E060036518A /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				D78EA23E20B97E3C0036518A /* RunningTextLine.swift */,
+			);
+			path = Widgets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +237,7 @@
 			files = (
 				B092651320B8C6AB000DB733 /* MainViewController.swift in Sources */,
 				B063E86E20B8B711003D89CD /* AppDelegate.swift in Sources */,
+				D78EA23F20B97E3C0036518A /* RunningTextLine.swift in Sources */,
 				B092651020B8C19D000DB733 /* Constants.swift in Sources */,
 				B0A16D3820B8CB5F00336FEA /* SettingsViewController.swift in Sources */,
 			);
