@@ -35,10 +35,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fh0-eL-n66" customClass="GLLFView" customModule="HaishinKit">
-                                <rect key="frame" x="0.0" y="64" width="375" height="548"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghi-gO-XzT">
                                 <rect key="frame" x="105" y="620" width="166" height="38"/>
                                 <state key="normal" title="Start"/>
@@ -53,6 +49,10 @@
                                     <action selector="pauseButtonClicked:" destination="Nei-Oh-7sa" eventType="touchUpInside" id="v96-Ct-rMF"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fh0-eL-n66" customClass="GLLFView" customModule="HaishinKit">
+                                <rect key="frame" x="0.0" y="64" width="375" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.72597396087183308" green="0.7847941094986709" blue="0.80384534600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>

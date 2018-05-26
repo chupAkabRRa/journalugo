@@ -146,7 +146,7 @@ private extension MainViewController {
     }
 
     func configureCameraView() {
-        lfView.videoGravity = AVLayerVideoGravity.resizeAspect
+        lfView.videoGravity = AVLayerVideoGravity.resizeAspectFill
         lfView.attachStream(rtmpStream)
     }
 }
