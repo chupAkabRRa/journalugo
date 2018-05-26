@@ -72,8 +72,8 @@ public class MainViewController: UIViewController {
 
     @IBAction func pauseButtonClicked(_ sender: UIButton) {
         widget = RunningTextLineWidget(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
-                    widget.addLabel(text: "ZDAROVA BRO KAK DELA ZHITUHA U MENYA VSE OK SIZHU POGROMIRUY")
-//                    lfView.addSubview(widget.internalLabel)
+        widget.addLabel(text: "ZDAROVA BRO KAK DELA ZHITUHA U MENYA VSE OK SIZHU POGROMIRUY")
+        self.view.insertSubview(widget.internalLabel, belowSubview: lfView)
         _ = rtmpStream.registerEffect(video: widget)
 //        rtmpStream.togglePause()
     }

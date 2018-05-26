@@ -9,7 +9,9 @@
 import UIKit
 import HaishinKit
 
-private class RunningTextLine: UIView {
+class RunningTextLine: UIView {
+    public var image: CIImage?
+
     private var textArray = [String]()
     // rect for text info
     private var rect0: CGRect!
@@ -39,14 +41,18 @@ private class RunningTextLine: UIView {
         setup()
     }
     
-    func getImage() -> CIImage {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0)
-        defer { UIGraphicsEndImageContext() }
-        self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
-        let result: CIImage = CIImage(image: UIGraphicsGetImageFromCurrentImageContext()!, options: nil)!
+    func getImage() {
+        DispatchQueue.main.async {
+            UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0)
+            self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+            self.image = CIImage(image: UIGraphicsGetImageFromCurrentImageContext()!, options: nil)!
+            UIGraphicsEndImageContext()
+        }
+
+
+
+        // This line is for image local save
         //return UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
-        
-        return result
     }
     
     func reinitLabels() {
@@ -58,7 +64,7 @@ private class RunningTextLine: UIView {
         let labelAtIndex0 = labelArray[0]
         labelAtIndex0.text = textToDisplay
         let labelAtIndex1 = labelArray[1]
-        
+
         let sizeOfText = labelAtIndex0.sizeThatFits(CGSize.zero)
         timeInterval = TimeInterval(textToDisplay.count / 5)
         
@@ -71,7 +77,7 @@ private class RunningTextLine: UIView {
         let strEmpty = str.padding(toLength: textToDisplay.count, withPad: " ", startingAt: 0)
         labelAtIndex1.text = strEmpty
         labelAtIndex1.frame = rect1
-        
+
         self.labelArray[0] = labelAtIndex0
         self.labelArray[1] = labelAtIndex1
     }
@@ -106,7 +112,7 @@ private class RunningTextLine: UIView {
 }
 
 class RunningTextLineWidget: VisualEffect {
-    private var internalLabel: RunningTextLine!
+    public var internalLabel: RunningTextLine!
     let filter: CIFilter? = CIFilter(name: "CISourceOverCompositing")
     
     public init(frame: CGRect) {
@@ -118,7 +124,12 @@ class RunningTextLineWidget: VisualEffect {
     }
     
     override func execute(_ image: CIImage) -> CIImage {
-        let result: CIImage = internalLabel.getImage()
+        internalLabel.getImage()
+        guard let result = internalLabel.image else {
+            return CIImage.empty()
+        }
+
+        
         filter!.setValue(result, forKey: "inputImage")
         filter!.setValue(image, forKey: "inputBackgroundImage")
         
