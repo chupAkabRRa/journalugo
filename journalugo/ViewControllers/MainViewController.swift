@@ -36,6 +36,7 @@ public class MainViewController: UIViewController {
     
     // Set of different widgets for demo
     var widgetRunningText: RunningTextLineWidget!
+    var widgetBadge: BadgeWidget!
 
     var currentPosition: AVCaptureDevice.Position = .back
 
@@ -44,6 +45,15 @@ public class MainViewController: UIViewController {
 
         configureView()
         setupRTMPStream()
+        
+        widgetBadge = BadgeWidget(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
+        widgetBadge.internalLabel.cb = {
+            self.rtmpStream.unregisterEffect(video: self.widgetBadge)
+            self.widgetBadge.internalLabel.removeFromSuperview()
+        }
+        widgetBadge.addLabel(text: "Dima Kostenich")
+        self.view.insertSubview(widgetBadge.internalLabel, belowSubview: lfView)
+        _ = rtmpStream.registerEffect(video: widgetBadge)
         
         widgetRunningText = RunningTextLineWidget(frame: CGRect(x: 0, y: 0, width: lfView.frame.width - 15, height: 50))
         widgetRunningText.addLabel(text: "ZDAROVA BRO KAK DELA ZHITUHA U MENYA VSE OK SIZHU POGROMIRUY")
@@ -109,6 +119,9 @@ public class MainViewController: UIViewController {
 
     @IBAction func pauseButtonClicked(_ sender: UIButton) {
         rtmpStream.togglePause()
+        /*widgetBadge.addLabel(text: "Dima Kostenich")
+        self.view.insertSubview(widgetBadge.internalLabel, belowSubview: lfView)
+        _ = rtmpStream.registerEffect(video: widgetBadge)*/
     }
 
     @IBAction func startStream(_ sender: UIButton) {
