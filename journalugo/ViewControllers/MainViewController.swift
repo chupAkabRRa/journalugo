@@ -33,6 +33,7 @@ public class MainViewController: UIViewController {
 
     var rtmpConnection: RTMPConnection = RTMPConnection()
     var rtmpStream: RTMPStream!
+    var staticImage: StaticImageWidget?
     
     // Set of different widgets for demo
     var widgetRunningText: RunningTextLineWidget!
@@ -45,7 +46,7 @@ public class MainViewController: UIViewController {
 
         configureView()
         setupRTMPStream()
-        
+      
         widgetBadge = BadgeWidget(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
         widgetBadge.internalLabel.cb = {
             self.rtmpStream.unregisterEffect(video: self.widgetBadge)
@@ -54,11 +55,8 @@ public class MainViewController: UIViewController {
         widgetBadge.addLabel(text: "Dima Kostenich")
         self.view.insertSubview(widgetBadge.internalLabel, belowSubview: lfView)
         _ = rtmpStream.registerEffect(video: widgetBadge)
-        
-        widgetRunningText = RunningTextLineWidget(frame: CGRect(x: 0, y: 0, width: lfView.frame.width - 15, height: 50))
-        widgetRunningText.addLabel(text: "ZDAROVA BRO KAK DELA ZHITUHA U MENYA VSE OK SIZHU POGROMIRUY")
-        self.view.insertSubview(widgetRunningText.internalLabel, belowSubview: lfView)
-        _ = rtmpStream.registerEffect(video: widgetRunningText)
+
+        setupRunningLabelWidget()
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -74,8 +72,8 @@ public class MainViewController: UIViewController {
     override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        rtmpStream.close()
-        rtmpStream.dispose()
+//        rtmpStream.close()
+//        rtmpStream.dispose()
     }
 
     @IBAction func swapCamera(_ sender: UIBarButtonItem) {
@@ -152,9 +150,51 @@ public class MainViewController: UIViewController {
     }
 }
 
+extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+
+        self.dismiss(animated: true) {
+            self.staticImage = StaticImageWidget()
+            self.staticImage!.image = image?.resize(to: self.view.frame.size)
+            self.staticImage!.targetPoint = self.view.center
+
+            _ = self.rtmpStream.registerEffect(video: self.staticImage!)
+
+            _ = self.rtmpStream.unregisterEffect(video: self.widgetRunningText)
+            self.setupRunningLabelWidget()
+        }
+    }
+}
+
 private extension MainViewController {
     func configureView() {
         navigationItem.title = DisplayData.navigationItemTitle
+
+        lfView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler(_:))))
+        lfView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressGestureHandler(_:))))
+    }
+
+    @objc
+    func tapGestureHandler(_ sender: UITapGestureRecognizer) {
+        guard let staticImage = self.staticImage else {
+            return
+        }
+
+        _ = self.rtmpStream.unregisterEffect(video: staticImage)
+    }
+
+    @objc
+    func longPressGestureHandler(_ sender: UILongPressGestureRecognizer) {
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum;
+            imagePicker.allowsEditing = false
+
+            self.navigationController?.present(imagePicker, animated: true, completion: nil)
+        }
     }
 
     func setupRTMPStream() {
@@ -191,5 +231,12 @@ private extension MainViewController {
     func configureCameraView() {
         lfView.videoGravity = AVLayerVideoGravity.resizeAspectFill
         lfView.attachStream(rtmpStream)
+    }
+
+    func setupRunningLabelWidget() {
+        widgetRunningText = RunningTextLineWidget(frame: CGRect(x: 0, y: 0, width: lfView.frame.width - 15, height: 50))
+        widgetRunningText.addLabel(text: "ZDAROVA BRO KAK DELA ZHITUHA U MENYA VSE OK SIZHU POGROMIRUY")
+        self.view.insertSubview(widgetRunningText.internalLabel, belowSubview: lfView)
+        _ = rtmpStream.registerEffect(video: widgetRunningText)
     }
 }
