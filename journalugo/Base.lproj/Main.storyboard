@@ -44,7 +44,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coB-zP-FOd">
                                 <rect key="frame" x="313" y="624" width="46" height="30"/>
-                                <state key="normal" title="Pause"/>
+                                <state key="normal" title="Alert"/>
                                 <connections>
                                     <action selector="pauseButtonClicked:" destination="Nei-Oh-7sa" eventType="touchUpInside" id="v96-Ct-rMF"/>
                                 </connections>

@@ -62,7 +62,7 @@ class BadgeTextLine: UIView {
             let sizeOfText = labelAtIndex0.sizeThatFits(CGSize.zero)
             timeInterval = TimeInterval(textToDisplay.count / 10)
             
-            leadingBuffer = -sizeOfText.width
+            leadingBuffer = 0
             rect0 = CGRect(x: leadingBuffer, y: 0, width: sizeOfText.width, height: self.bounds.size.height)
             rect1 = CGRect(x: rect0.origin.x + rect0.size.width, y: 0, width: sizeOfText.width, height: self.bounds.size.height)
             
@@ -92,17 +92,18 @@ class BadgeTextLine: UIView {
         }
         
         reinitLabels()
-        animateLabelText()
+        //animateLabelText()
     }
     
     func animateLabelText() {
         let labelAtIndex0 = labelArray[0]
         let labelAtIndex1 = labelArray[1]
         
-        UIView.animate(withDuration: timeInterval, delay: loopStartDelay, options: [.curveLinear], animations: {
+        UIView.animate(withDuration: timeInterval, delay: loopStartDelay, options: [.curveLinear, .autoreverse], animations: {
             labelAtIndex1.frame = CGRect(x: self.rect1.size.width, y: 0,width: labelAtIndex1.frame.size.width,height: labelAtIndex1.frame.size.height)
             labelAtIndex0.frame = CGRect(x: labelAtIndex1.frame.origin.x - labelAtIndex0.frame.size.width, y: 0, width: self.rect0.size.width,height: self.rect0.size.height)
         }, completion: {finished in
+                print("loh")
                 self.cb?()
             }
         )
